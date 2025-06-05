@@ -13,3 +13,6 @@
 [submodule "Assets/M8SpreadsheetParser"]
 	path = Assets/M8SpreadsheetParser
 	url = https://github.com/ddionisio/MateSpreadsheetParser.git
+[submodule "Assets/M8PostProcessEffects"]
+	path = Assets/M8PostProcessEffects
+	url = https://github.com/ddionisio/MatePostProcessEffects.git

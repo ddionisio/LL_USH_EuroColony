@@ -36,8 +36,14 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Post Process
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: FX
+    uniqueID: 3855880857
+    locked: 0
+  - name: UI
+    uniqueID: 2839052105
     locked: 0
