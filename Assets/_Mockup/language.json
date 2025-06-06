@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "maxChars": {
+    }
+  },
+  "en": {
+    "title": "<size=50>Attack on Blob</size>\nDivide and Conquer",
+    "credits": "Made by: RENEGADEWARE",
+    "new": "NEW GAME",
+    "continue": "CONTINUE",
+    "options": "OPTIONS",
+    "music": "MUSIC",
+    "sound": "SOUND",
+    "speech": "SPEECH",
+    "close": "CLOSE",
+    "on": "ON",
+    "off": "OFF"
+  }
+}

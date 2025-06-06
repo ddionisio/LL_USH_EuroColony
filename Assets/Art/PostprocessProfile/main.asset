@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7187193441615090898
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f6dc40d90cbd94f90f2cd9d76eb22f, type: 3}
+  m_Name: Dither
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 0
+  pattern:
+    overrideState: 1
+    value: {fileID: 2800000, guid: 07ade3ea7a489d64889ebcf5c97fc68d, type: 3}
+  weight:
+    overrideState: 1
+    value: {fileID: 2800000, guid: 24c3cddddc411bf41898a1375ebf341d, type: 3}
+  adjust:
+    overrideState: 1
+    value: -0.03
+--- !u!114 &-781877508765828386
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80119533d35c19438d493761135d4e5, type: 3}
+  m_Name: Quantize
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 0
+  blend:
+    overrideState: 1
+    value: 1
+  levels:
+    overrideState: 1
+    value: 32
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,9 +60,8 @@ MonoBehaviour:
   m_Name: main
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: 8746456170766704283}
-  - {fileID: 6119552413208462417}
-  - {fileID: 7857049756777541286}
+  - {fileID: -781877508765828386}
+  - {fileID: -7187193441615090898}
 --- !u!114 &6119552413208462417
 MonoBehaviour:
   m_ObjectHideFlags: 3
