@@ -1,23 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using UnityEngine.U2D;
+
 using M8;
 
 namespace LoLExt {
     public class GameCamera : MonoBehaviour {
         [Header("Bounds Settings")]
         public float boundsChangeDelay = 0.3f;
-        public M8.Signal signalBoundsChangeFinish;
+        public Signal signalBoundsChangeFinish;
 
         [Header("Move Settings")]
-        public DG.Tweening.Ease moveToEase;
-        public float moveToSpeed = 10f;
+        public float moveDelay = 0.3f;
 
         [Header("Bounds")]
         [SerializeField]
         bool _boundLocked = true;
-
-        public Camera2D camera2D { get; private set; }
 
         public Vector2 position { get { return transform.position; } }
 
@@ -39,12 +39,46 @@ namespace LoLExt {
                 if(mMain == null) {
                     Camera cam = Camera.main;
                     mMain = cam != null ? cam.GetComponentInParent<GameCamera>() : null;
+
+                    if(mMain) {
+                        mMain.mCam = cam;
+                        mMain.mCamPixel = cam.GetComponent<PixelPerfectCamera>();
+                    }
                 }
                 return mMain;
             }
         }
 
+        public Camera cam {
+            get {
+                if(!mCam) mCam = GetComponentInChildren<Camera>();
+                return mCam;
+            }
+        }
+
+        public PixelPerfectCamera camPixel {
+            get {
+                if(!mCamPixel) {
+                    var _cam = cam;
+                    if(_cam)
+                        mCamPixel = _cam.GetComponent<PixelPerfectCamera>();
+                }
+
+                return mCamPixel;
+			}
+        }
+
+        /// <summary>
+        /// World-space
+        /// </summary>
+        public Rect bounds {
+            get { return mBoundsRectNext; }
+        }
+
         private static GameCamera mMain;
+
+        private Camera mCam;
+        private PixelPerfectCamera mCamPixel;
 
         private Coroutine mMoveToRout;
 
@@ -53,6 +87,7 @@ namespace LoLExt {
         private Coroutine mBoundsChangeRout;
 
         private Rect mBoundsRect;
+        private Vector2 mMoveDest;
 
         public void SetBounds(Rect newBounds, bool interpolate) {
             //don't interpolate if current bounds is invalid
@@ -68,15 +103,13 @@ namespace LoLExt {
                 mBoundsChangeRout = StartCoroutine(DoBoundsChange());
             }
             else {
-                mBoundsRect = newBounds;
+                mBoundsRect = mBoundsRectNext = newBounds;
 
                 SetPosition(transform.position); //refresh clamp
             }
         }
 
         public void MoveTo(Vector2 dest) {
-            StopMoveTo();
-
             //clamp
             if(boundLocked)
                 dest = mBoundsRect.Clamp(dest, cameraViewExtents);
@@ -85,7 +118,10 @@ namespace LoLExt {
             if(position == dest)
                 return;
 
-            mMoveToRout = StartCoroutine(DoMoveTo(dest));
+            mMoveDest = dest;
+
+            if(mMoveToRout == null)
+			    mMoveToRout = StartCoroutine(DoMoveTo());
         }
 
         public void StopMoveTo() {
@@ -108,7 +144,7 @@ namespace LoLExt {
 
             return cameraViewRect.Overlaps(rect);
         }
-
+                
         void OnDisable() {
             StopMoveTo();
 
@@ -120,10 +156,13 @@ namespace LoLExt {
             }
         }
 
-        void Awake() {
-            camera2D = GetComponentInChildren<Camera2D>();
+		void OnDestroy() {
+            if(mMain == this)
+                mMain = null;
+		}
 
-            var unityCam = camera2D.unityCamera;
+		void Awake() {
+            var unityCam = cam;
 
             //setup view bounds
             var minExt = unityCam.ViewportToWorldPoint(Vector3.zero);
@@ -138,30 +177,20 @@ namespace LoLExt {
             cameraViewExtents = cameraViewRect.size * 0.5f;
         }
 
-        IEnumerator DoMoveTo(Vector2 dest) {
-            float curTime = 0f;
+        IEnumerator DoMoveTo() {
+            Vector2 pos = transform.position;
+            Vector2 vel = Vector2.zero;
 
-            Vector2 start = transform.position;
-
-            float dist = (dest - start).magnitude;
-            float delay = dist / moveToSpeed;
-
-            var easeFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(moveToEase);
-
-            while(curTime < delay) {
-                float t = easeFunc(curTime, delay, 0f, 0f);
-
-                var newPos = Vector2.Lerp(start, dest, t);
-                SetPosition(newPos);
+            while(!MathUtil.CompareApprox(pos, mMoveDest, 0.001f)) {
+                pos = Vector2.SmoothDamp(pos, mMoveDest, ref vel, moveDelay);
+                SetPosition(pos);
 
                 yield return null;
-
-                curTime += Time.deltaTime;
             }
 
-            SetPosition(dest);
+			SetPosition(mMoveDest);
 
-            mMoveToRout = null;
+			mMoveToRout = null;
         }
 
         IEnumerator DoBoundsChange() {
