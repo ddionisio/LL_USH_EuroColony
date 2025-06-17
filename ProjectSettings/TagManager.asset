@@ -12,6 +12,10 @@ TagManager:
   - Water
   - UI
   - Touch
+  - Ground
+  - Structure
+  - Blocker
+  - Unit
   - 
   - 
   - 
@@ -33,13 +37,33 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - Post Process
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1952713799
+    locked: 0
+  - name: World
+    uniqueID: 565941603
+    locked: 0
+  - name: WorldOverlay
+    uniqueID: 1873180259
+    locked: 0
+  - name: WorldInterface
+    uniqueID: 2838383761
+    locked: 0
+  - name: Landscape
+    uniqueID: 2259967625
+    locked: 0
+  - name: Structure
+    uniqueID: 1334819337
+    locked: 0
+  - name: Ground
+    uniqueID: 1787707289
+    locked: 0
+  - name: Unit
+    uniqueID: 1750382183
     locked: 0
   - name: FX
     uniqueID: 3855880857
