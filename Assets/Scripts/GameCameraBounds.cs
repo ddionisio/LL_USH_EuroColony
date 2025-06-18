@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using LoLExt;
-
 public class GameCameraBounds : MonoBehaviour {
 	[SerializeField]
 	Rect _bounds;

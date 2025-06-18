@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-using LoLExt;
-
 public class GameCameraDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 	public enum Axis {
 		None,
@@ -70,7 +68,4 @@ public class GameCameraDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 	void IEndDragHandler.OnEndDrag(PointerEventData eventData) {
 		mIsDragging = false;
 	}
-
-	//deselect?
-	//void IPointerClickHandler.OnPointerClick(PointerEventData eventData)	
 }
