@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571efecca02d7524ba116f42e9807cb9, type: 3}
+  m_Name: gameData
+  m_EditorClassIdentifier: 
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  placementCheckLayerMask:
+    serializedVersion: 2
+    m_Bits: 896
+  unitAllyTag: Ally
+  unitEnemyTag: Enemy
+  unitLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  unitSortLayer: Unit
+  unitGhostSortLayer: Ghost
+  unitGhostColor: {r: 0.75, g: 0.75, b: 0.75, a: 0.5019608}
+  unitPaletteSpawnDelay: 2
+  unitFallSpeed: 10
+  unitUpdateAIDelay: 0.3
+  unitHurtDelay: 0.5
+  unitDyingDelay: 5
+  unitIdleWanderDelay: 2
+  unitGatherDelay: 0.5
+  unitRetreatDistanceRange:
+    min: 4
+    max: 5

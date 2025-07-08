@@ -138,7 +138,7 @@ public class GameCamera : MonoBehaviour {
         transform.position = pos;
     }
 
-    public bool isVisible(Rect rect) {
+    public bool IsVisible(Rect rect) {
         rect.center = transform.worldToLocalMatrix.MultiplyPoint3x4(rect.center);
 
         return cameraViewRect.Overlaps(rect);

@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ally
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -67,6 +69,9 @@ TagManager:
     locked: 0
   - name: FX
     uniqueID: 3855880857
+    locked: 0
+  - name: Ghost
+    uniqueID: 3425176529
     locked: 0
   - name: UI
     uniqueID: 2839052105
