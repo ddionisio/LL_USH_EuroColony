@@ -8,6 +8,13 @@ public class UnitData : GenericData {
 	public PopulationData popData;
 	public int popCount;
 
+	[Header("Card Info")]
+	public int cardDeployCost;
+	public int cardUnitCount;
+
+	[Header("Spawn Info")]
+	public Unit spawnTemplate;
+
 	[Header("Stats")]
 	public int hitpoints;
 

@@ -104,7 +104,14 @@ public class Unit : MonoBehaviour, M8.IPoolInit, M8.IPoolSpawn, M8.IPoolSpawnCom
 		get { return data ? data.hitpoints : 0; }
 	}
 
-	public BoxCollider2D boxCollider { get; private set; }
+	public BoxCollider2D boxCollider { 
+		get {
+			if(!mBoxCollider)
+				mBoxCollider = GetComponent<BoxCollider2D>();
+
+			return mBoxCollider;
+		}
+	}
 
 	public Bounds bounds { get { return boxCollider ? boxCollider.bounds : new Bounds(); } }
 
@@ -174,6 +181,8 @@ public class Unit : MonoBehaviour, M8.IPoolInit, M8.IPoolSpawn, M8.IPoolSpawnCom
 	private int mHitpoints;
 
 	private int mMark;
+
+	private BoxCollider2D mBoxCollider;
 
 	private SpriteRenderer[] mSprites;
 	private Color[] mSpriteColors;
@@ -346,9 +355,9 @@ public class Unit : MonoBehaviour, M8.IPoolInit, M8.IPoolSpawn, M8.IPoolSpawnCom
 
 		poolCtrl = GetComponent<M8.PoolDataController>();
 
-		boxCollider = GetComponent<BoxCollider2D>();
-		if(boxCollider)
-			boxCollider.enabled = false;
+		mBoxCollider = GetComponent<BoxCollider2D>();
+		if(mBoxCollider)
+			mBoxCollider.enabled = false;
 
 		mSprites = root.GetComponentsInChildren<SpriteRenderer>(true);
 		mSpriteColors = new Color[mSprites.Length];
